@@ -5,8 +5,9 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(700, 700), "Fractal Tree");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Fractal Tree");
     window.setFramerateLimit(30);
+    glOrtho(0.0, window.getSize().x, window.getSize().y, 0.0, 1.0, -1.0);
 
     while (window.isOpen())
     {
@@ -16,6 +17,12 @@ int main()
             if (event.type == sf::Event::Closed) window.close();
         }
         window.clear();
+
+        glColor3f(0.28, 0.28, 0.28);
+        glBegin(GL_LINES);
+        glVertex2f(150.0, 300.0);
+        glVertex2f(150.0, 500.0);
+        glEnd();
 
         window.display();
         usleep(1000000);
