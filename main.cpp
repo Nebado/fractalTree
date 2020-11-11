@@ -2,6 +2,28 @@
 #include <SFML/OpenGL.hpp>
 #include <time.h>
 #include <unistd.h>
+#include <cmath>
+
+void lineTo(float x, float y, float length, float angle)
+{
+    glBegin(GL_LINES);
+    glVertex2f(x, y);
+    glVertex2f(x + length * cos(angle), y + length * sin(angle));
+    glEnd();
+}
+
+void tree(float x, float y, float length, float angle, float lenDiv, float angleDif, int depth)
+{
+    lineTo(x, y, length, angle);
+
+    if (depth == 0) return;
+
+    // Right
+    tree(x + length * cos(angle), y + length * sin(angle), length * lenDiv, angle + angleDif, lenDiv, angleDif, depth-1);
+
+    // Left
+    tree(x + length * cos(angle), y + length * sin(angle), length * lenDiv, angle - angleDif, lenDiv, angleDif, depth-1);
+}
 
 int main()
 {
@@ -18,11 +40,7 @@ int main()
         }
         window.clear();
 
-        glColor3f(0.28, 0.28, 0.28);
-        glBegin(GL_LINES);
-        glVertex2f(150.0, 300.0);
-        glVertex2f(150.0, 500.0);
-        glEnd();
+        tree(400.0, 750.0, 100.0, -M_PI/2.0, 0.8, M_PI/12.0, 10);
 
         window.display();
         usleep(1000000);
