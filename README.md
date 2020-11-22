@@ -18,7 +18,5 @@ $ g++ main.cpp -lGL -lsfml-graphics -lsfml-window -lsfml-system -o tree
 
 $ ./tree
 ```
-
-## References
-
 [SFML]: https://www.sfml-dev.org/
+[OpenGL]: https://www.opengl.org/
